@@ -146,6 +146,10 @@ class Socket {
 		throw "Not implemented";
 	}
 
+	public function setKeepAlive( ?interval : Int ) : Void {
+		throw "Not implemented";
+	}
+
 	public function waitForRead() : Void {
 		select([this],null,null);
 	}

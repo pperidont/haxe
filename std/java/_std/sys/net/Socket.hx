@@ -163,6 +163,13 @@ class Socket {
 		catch(e:Dynamic) throw e;
 	}
 
+	public function setKeepAlive( ?interval : Int ) : Void 
+	{
+		try
+			sock.setKeepAlive(interval!=null)
+		catch(e:Dynamic) throw e;
+	}
+
 	public static function select(read : Array<Socket>, write : Array<Socket>, others : Array<Socket>, ?timeout : Float) : { read: Array<Socket>,write: Array<Socket>,others: Array<Socket> }
 	{
 		throw "Not implemented";

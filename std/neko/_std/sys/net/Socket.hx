@@ -195,6 +195,10 @@ class Socket {
 		socket_set_timeout(__s, timeout);
 	}
 
+	public function setKeepAlive( ?interval : Int ) : Void {
+		socket_set_keepalive(__s, interval);
+	}
+
 	public function waitForRead() : Void {
 		select([this],null,null,null);
 	}
@@ -260,4 +264,5 @@ class Socket {
 	private static var socket_shutdown = neko.Lib.load("std","socket_shutdown",3);
 	private static var socket_set_blocking = neko.Lib.load("std","socket_set_blocking",2);
 	private static var socket_set_fast_send = neko.Lib.loadLazy("std","socket_set_fast_send",2);
+	private static var socket_set_keepalive = neko.Lib.loadLazy("std","socket_set_keepalive",2);
 }

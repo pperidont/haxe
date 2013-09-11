@@ -113,6 +113,11 @@ extern class Socket {
 	function setBlocking( b : Bool ) : Void;
 
 	/**
+		Enable TCP_KEEPALIVE option. Send first probe after interval in seconds. Consider the socket in error after one more interval without getting a reply. Disable TCP_KEEPALIVE if interval is [null].
+	**/
+	function setKeepAlive( ?interval : Int ) : Void;
+
+	/**
 		Allows the socket to immediatly send the data when written to its output : this will cause less ping but might increase the number of packets / data size, especially when doing a lot of small writes.
 	**/
 	function setFastSend( b : Bool ) : Void;
