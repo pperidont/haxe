@@ -146,7 +146,7 @@ class Socket {
 		throw "Not implemented";
 	}
 
-	public function setKeepAlive( ?interval : Int ) : Void {
+	public function setKeepAlive( b : Bool, ?time : Int, ?interval : Int, ?probes : Int ) : Void {
 		throw "Not implemented";
 	}
 

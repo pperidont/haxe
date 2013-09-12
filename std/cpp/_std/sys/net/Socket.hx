@@ -214,8 +214,8 @@ class Socket {
 		socket_set_fast_send(__s,b);
 	}
 
-	public function setKeepAlive( ?interval : Int ) : Void {
-		socket_set_keepalive(__s,interval);
+	public function setKeepAlive( b : Bool, ?time : Int, ?interval : Int, ?probes : Int ) : Void {
+		socket_set_keepalive(__s,b,time,interval,probes);
 	}
 
 	public static function select(read : Array<Socket>, write : Array<Socket>, others : Array<Socket>, ?timeout : Float ) : {read: Array<Socket>,write: Array<Socket>,others: Array<Socket>} {
@@ -244,6 +244,6 @@ class Socket {
 	private static var socket_shutdown = cpp.Lib.load("std","socket_shutdown",3);
 	private static var socket_set_blocking = cpp.Lib.load("std","socket_set_blocking",2);
 	private static var socket_set_fast_send = cpp.Lib.loadLazy("std","socket_set_fast_send",2);
-	private static var socket_set_keepalive = cpp.Lib.loadLazy("std","socket_set_keepalive",2);
+	private static var socket_set_keepalive = cpp.Lib.loadLazy("std","socket_set_keepalive",5);
 
 }

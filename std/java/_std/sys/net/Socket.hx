@@ -163,10 +163,10 @@ class Socket {
 		catch(e:Dynamic) throw e;
 	}
 
-	public function setKeepAlive( ?interval : Int ) : Void 
+	public function setKeepAlive( b : Bool, ?time : Int, ?interval : Int, ?probes : Int ) : Void 
 	{
 		try
-			sock.setKeepAlive(interval!=null)
+			sock.setKeepAlive(b)
 		catch(e:Dynamic) throw e;
 	}
 
