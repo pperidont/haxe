@@ -125,6 +125,11 @@ class Socket implements sys.net.ISocket {
 		__s = socket_new( false );
 		input = new SocketInput( __s );
 		output = new SocketOutput( __s );
+		if( DEFAULT_VERIFY_CERT && DEFAULT_CA == null ){
+			try {
+				DEFAULT_CA = Certificate.loadDefaults();
+			}catch( e : Dynamic ){}
+		}
 		verifyCert = DEFAULT_VERIFY_CERT;
 		caCert = DEFAULT_CA;
 	}

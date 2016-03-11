@@ -17,8 +17,33 @@ class Certificate {
 	public static function loadPath( path : String ) : Certificate {
 		return new Certificate( cert_load_path( path ) );
 	}
-	
+
 	public static function loadDefaults() : Certificate {
+		var defPaths = null;
+		switch( Sys.systemName() ){
+			case "Linux":
+				defPaths = [
+					"/etc/ssl/certs/ca-certificates.crt", // Debian/Ubuntu/Gentoo etc.
+					"/etc/pki/tls/certs/ca-bundle.crt",   // Fedora/RHEL
+					"/etc/ssl/ca-bundle.pem",             // OpenSUSE
+					"/etc/pki/tls/cacert.pem",            // OpenELEC
+					"/etc/ssl/certs"                      // SLES10/SLES11
+				];
+			case "BSD":
+				defPaths = [
+					"/usr/local/share/certs/ca-root-nss.crt", // FreeBSD/DragonFly
+					"/etc/ssl/cert.pem",                      // OpenBSD
+					"/etc/openssl/certs/ca-certificates.crt", // NetBSD	
+				];
+			case "Android":
+				defPaths = ["/system/etc/security/cacerts"];
+			default:
+		}
+		if( defPaths != null ){
+			for( path in defPaths )
+				if( sys.FileSystem.exists(path) )
+					return loadFile(path);
+		}
 		var x = cert_load_defaults();
 		return x == null ? null : new Certificate( x );
 	}
